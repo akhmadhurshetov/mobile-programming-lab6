@@ -17,6 +17,8 @@ lab4/
 4. Provider examples  
 
 ### Run
+flutter pub get
+flutter run
 
 ### Dependency
 
