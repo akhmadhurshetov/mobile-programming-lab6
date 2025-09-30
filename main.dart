@@ -23,6 +23,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -49,9 +50,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// Menu of all tasks
+/// Main menu to access all Lab 6 tasks
 class LabMenu extends StatelessWidget {
   const LabMenu({super.key});
+
   @override
   Widget build(BuildContext context) {
     final Map<String, Widget> pages = {
@@ -61,21 +63,47 @@ class LabMenu extends StatelessWidget {
       'Like Button (non-interactive)': const LikeButton(),
       'Interactive Like Button': const InteractiveLikeButtonPage(),
       'TextFormField State': const UserNameInputPage(),
+
       // Section 2
       'Counter + Decrement': const CounterWithDecrement(),
       'Toggle Visibility': const ToggleVisibilityPage(),
       'Add Items to List': const ItemListPage(),
       'Color Box': const ColorBoxPage(),
+
       // Section 3
       'Switch Manager': const SwitchManagerPage(),
       'Greeting': const NameParentPage(),
       'Temperature Converter': const TemperatureConverterPage(),
       'Survey App': const SurveyAppPage(),
       'Prop Drilling vs Provider': const PropDrillBeforeAfterPage(),
-      // Section 4
+
+      // Section 4 (Provider)
       'Provider Counter': const ProviderCounterPage(),
       'Provider User Change': const ProviderUserPage(),
       'Theme Switcher': const ThemeSwitcherPage(),
       'Todo List (Provider)': const TodoListPageScreen(),
       'Favorite (Provider)': const FavoriteProviderPage(),
-     
+      'Shopping Cart': const ProductScreen(),
+      'Async Loading': const AsyncScreen(),
+      'Settings Screen': const SettingsScreen(),
+    };
+
+    final items = pages.entries.toList();
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Lab 6 — Menu')),
+      body: ListView.separated(
+        itemBuilder: (c, i) => ListTile(
+          title: Text(items[i].key),
+          trailing: const Icon(Icons.keyboard_arrow_right),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => items[i].value),
+          ),
+        ),
+        separatorBuilder: (_, __) => const Divider(),
+        itemCount: items.length,
+      ),
+    );
+  }
+}
